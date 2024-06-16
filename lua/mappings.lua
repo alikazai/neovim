@@ -37,3 +37,5 @@ map("n", "<leader>dgl", function()
   require('dap-go').debug_last()
 end,{ desc = "Debug last go test" })
 
+-- LazyGit
+map ("n", "<leader>lg", "<cmd>LazyGit<cr>", {desc = "LazyGit"})
