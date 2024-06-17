@@ -5,6 +5,7 @@ local map = vim.keymap.set
 -- General
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
+map("n", "<C-z>","<nop>", {desc = "Nothing"})
 
 
 -- Nvim DAP
@@ -38,4 +39,4 @@ map("n", "<leader>dgl", function()
 end,{ desc = "Debug last go test" })
 
 -- LazyGit
-map ("n", "<leader>lg", "<cmd>LazyGit<cr>", {desc = "LazyGit"})
+map ("n", "<leader>gg", "<cmd>LazyGit<cr>", {desc = "LazyGit"})
