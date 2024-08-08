@@ -64,6 +64,7 @@ return {
     dependencies = "mfussenegger/nvim-dap",
     config = function(_, opts)
       require("dap-go").setup(opts)
+      require("core.utils").load_mappings("dap_go")
     end
   },
   {
@@ -83,6 +84,7 @@ return {
       "mfussenegger/nvim-dap", -- (optional) only if you use `gopher.dap`
     },
     config = function()
+      require("core.utils").load_mappings("gopher")
       require("gopher").setup {
         commands = {
           go = "go",
