@@ -36,7 +36,6 @@ return {
         "html-lsp",
         "css-lsp",
         "prettier",
-        "gopls",
         "markdownlint",
         "markdown-toc"
       },
@@ -52,60 +51,24 @@ return {
     },
   },
   {
-    -- nvim debugger adapter protocol
-    "mfussenegger/nvim-dap",
-  },
-  {
-    -- go debugger for delve
-    "leoluz/nvim-dap-go",
-    ft = "go",
-    dependencies = "mfussenegger/nvim-dap",
-    config = function(_, opts)
-      require("dap-go").setup(opts)
-    end
+    "ray-x/go.nvim",
+    dependencies = {  -- optional packages
+      "ray-x/guihua.lua",
+      "neovim/nvim-lspconfig",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    config = function()
+      require("go").setup()
+    end,
+    event = {"CmdlineEnter"},
+    ft = {"go", 'gomod'},
+    build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
   },
   {
     "jose-elias-alvarez/null-ls.nvim",
     ft = "go",
     opts = function()
       return require "plugins.configs.null-ls"
-    end,
-  },
-  {
-    -- go
-    "olexsmir/gopher.nvim",
-    ft = "go",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-      "mfussenegger/nvim-dap", -- (optional) only if you use `gopher.dap`
-    },
-    config = function()
-      require("gopher").setup {
-        commands = {
-          go = "go",
-          gomodifytags = "gomodifytags",
-          gotests = "gotests",
-          impl = "impl",
-          iferr = "iferr",
-          dlv = "dlv",
-        },
-        gotests = {
-          -- gotests doesn't have template named "default" so this plugin uses "default" to set the default template
-          template = "default",
-          -- path to a directory containing custom test code templates
-          template_dir = nil,
-          -- switch table tests from using slice to map (with test name for the key)
-          -- works only with gotests installed from develop branch
-          named = false,
-        },
-        gotag = {
-          transform = "snakecase",
-        },
-      }
-    end,
-    build = function()
-      vim.cmd.GoInstallDeps()
     end,
   },
   {

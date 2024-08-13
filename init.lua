@@ -31,6 +31,8 @@ dofile(vim.g.base46_cache .. "statusline")
 
 require "options"
 require "nvchad.autocmds"
+require('go').setup()
+require("go.format").goimports()  -- goimports + gofmt
 
 vim.schedule(function()
   require "mappings"
