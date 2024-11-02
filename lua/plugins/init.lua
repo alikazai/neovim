@@ -1,11 +1,28 @@
 return {
-
   {
     "stevearc/conform.nvim",
-    -- event = 'BufWritePre', -- uncomment for format on save
+    event = "BufWritePre", -- uncomment for format on save
     opts = require "configs.conform",
   },
-
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    opts = {
+      filesystem = {
+        filtered_items = {
+          visible = true,
+          show_hidden_count = true,
+          hide_dotfiles = false,
+          hide_gitignored = true,
+          hide_by_name = {
+            ".git",
+            ".DS_Store",
+            "thumbs.db",
+          },
+          never_show = {},
+        },
+      },
+    },
+  },
   -- These are some examples, uncomment them if you want to see them work!
   {
     "kdheepak/lazygit.nvim",
@@ -19,7 +36,7 @@ return {
     -- optional for floating window border decoration
     dependencies = {
       "nvim-lua/plenary.nvim",
-    }
+    },
   },
   {
     "neovim/nvim-lspconfig",
@@ -37,7 +54,7 @@ return {
         "css-lsp",
         "prettier",
         "markdownlint",
-        "markdown-toc"
+        "markdown-toc",
       },
     },
   },
@@ -45,14 +62,17 @@ return {
     "nvim-treesitter/nvim-treesitter",
     opts = {
       ensure_installed = {
-        "vim", "lua", "vimdoc",
-        "html", "css"
+        "vim",
+        "lua",
+        "vimdoc",
+        "html",
+        "css",
       },
     },
   },
   {
     "ray-x/go.nvim",
-    dependencies = {  -- optional packages
+    dependencies = { -- optional packages
       "ray-x/guihua.lua",
       "neovim/nvim-lspconfig",
       "nvim-treesitter/nvim-treesitter",
@@ -60,9 +80,9 @@ return {
     config = function()
       require("go").setup()
     end,
-    event = {"CmdlineEnter"},
-    ft = {"go", 'gomod'},
-    build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
+    event = { "CmdlineEnter" },
+    ft = { "go", "gomod" },
+    build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
   },
   {
     "jose-elias-alvarez/null-ls.nvim",
@@ -72,16 +92,16 @@ return {
     end,
   },
   {
-    'kristijanhusak/vim-dadbod-ui',
+    "kristijanhusak/vim-dadbod-ui",
     dependencies = {
-      { 'tpope/vim-dadbod', lazy = true },
-      { 'kristijanhusak/vim-dadbod-completion', ft = { 'sql', 'mysql', 'plsql' }, lazy = true },
+      { "tpope/vim-dadbod", lazy = true },
+      { "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" }, lazy = true },
     },
     cmd = {
-      'DBUI',
-      'DBUIToggle',
-      'DBUIAddConnection',
-      'DBUIFindBuffer',
+      "DBUI",
+      "DBUIToggle",
+      "DBUIAddConnection",
+      "DBUIFindBuffer",
     },
     init = function()
       -- Your DBUI configuration
@@ -103,14 +123,14 @@ return {
       },
     },
     config = function()
-      vim.cmd([[do FileType]])
+      vim.cmd [[do FileType]]
     end,
   },
   {
     "lukas-reineke/headlines.nvim",
     opts = function()
       local opts = {}
-      for _, ft in ipairs({ "markdown", "norg", "rmd", "org" }) do
+      for _, ft in ipairs { "markdown", "norg", "rmd", "org" } do
         opts[ft] = {
           headline_highlights = {},
           -- disable bullets for now. See https://github.com/lukas-reineke/headlines.nvim/issues/66
@@ -134,16 +154,6 @@ return {
     end,
   },
   {
-    "stevearc/conform.nvim",
-    optional = true,
-    opts = {
-      formatters_by_ft = {
-        ["markdown"] = { { "prettierd", "prettier" }, "markdownlint", "markdown-toc" },
-        ["markdown.mdx"] = { { "prettierd", "prettier" }, "markdownlint", "markdown-toc" },
-      },
-    },
-  },
-  {
     "nvimtools/none-ls.nvim",
     optional = true,
     opts = function(_, opts)
@@ -154,6 +164,10 @@ return {
     end,
   },
   {
+    "mfussenegger/nvim-dap",
+    config = function() end,
+  },
+  {
     "mfussenegger/nvim-lint",
     optional = true,
     opts = {
@@ -161,5 +175,5 @@ return {
         markdown = { "markdownlint" },
       },
     },
-  }
+  },
 }
